@@ -39,7 +39,7 @@ function job($connect, $data){
               VALUES ('$name', '$city', '$type', '$age', '$phone', '$email', '$company', '$position', '$startFormattedDate', '$endFormattedDate', '$comment', '$newFileName')";
     mysqli_query($connect, $query);
     
-    $to = $email;
+    $to = 'tomashehlysh@gmail.com';
     $subject = '=?UTF-8?B?' . base64_encode('Запит на роботу від ' . $name) . '?=';
     $message = '<p>Доброго дня,</p>';
     $message .= '
