@@ -79,7 +79,7 @@
                         <Editor v-model="this.comment" editorStyle="height: 150px" />
                     </label>
                     <Button label="Додати ще посаду" icon="pi pi-plus" @click="addNewPosition()"/>
-                    <Button label="Відправити" @click="sendMail()"/>
+                    <Button label="Відправити" :loading="buttonLoader" @click="sendMail()"/>
                     <div v-if="this.showExp">
                         <p>
                             Додані місця роботи:
@@ -129,7 +129,8 @@ export default {
             startDate: '',
             endDate: '',
             comment: '',
-            showExp: false
+            showExp: false,
+            buttonLoader: false
         }
     },
     methods:{
@@ -155,7 +156,7 @@ export default {
             this.cvFile = e.target.files[0]
         },
         addNewPosition(){
-            if(this.company.trim() && this.startDate && this.endDate){
+            if(this.company.trim() && this.startDate && this.endDate && this.position.trim()){
                 const work = {
                     id: this.lastWork.length,
                     company: this.company.trim(),
@@ -199,7 +200,7 @@ export default {
             this.showExp = false
             if(this.name && this.city && this.selectedType.name && this.age && this.phone && this.email){
                 if(!this.cv){
-                    if(this.company.trim() && this.startDate && this.endDate){
+                    if(this.company.trim() && this.startDate && this.endDate && this.position.trim()){
                         this.lastWork.push({
                             id: this.lastWork.length,
                             company: this.company.trim(),
@@ -217,6 +218,7 @@ export default {
                     this.$store.dispatch('setMessages', [{ severity: 'error', content: 'Додайте резюме', id: this.count++}])
                     return;
                 }
+                this.buttonLoader = true
                 let config = {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -249,7 +251,9 @@ export default {
                     this.startDate = ''
                     this.endDate = ''
                     this.comment = ''
+                    this.buttonLoader = false
                     this.$router.push({ path : '/' });
+                    localStorage.removeItem('user');
                 })
                 .catch(error => {
                     this.$store.dispatch('setMessages', [{ severity: 'error', content: error.response.data.error, id: this.count++}])
