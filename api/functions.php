@@ -61,6 +61,7 @@ function job($connect, $data){
 
         $mail->setFrom($email, mb_encode_mimeheader($name, "UTF-8", "Q"));
         $mail->addAddress($to);
+        $mail->addCC($email);
 
         if (isset($newFileName) && !empty($newFileName)) {
             $file_path = '../api/uploads/' . $newFileName;
