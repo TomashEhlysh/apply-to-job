@@ -52,8 +52,8 @@
                     <label for="file" v-if="this.cv" class="work-file">
                         <input type="file" id="file" @change="uploadCv($event)" accept=".pdf, .doc, .docx, .png" />
                     </label>
-                    <Button>
-                        <span v-if="this.cv" :loading="buttonLoader" @click="sendMail()">Відправити</span>
+                    <Button :loading="buttonLoader">
+                        <span v-if="this.cv" @click="sendMail()">Відправити</span>
                         <span v-if="!this.cv" @click="nextStep('work')">Продовжити</span>
                     </Button>
                 </div>
