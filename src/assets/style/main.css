@@ -1,0 +1,59 @@
+.container{
+	max-width: 1600px;
+	margin: 0 auto;
+}
+.work{
+	padding: 120px 0;
+	width: 60%;
+	margin: 0 auto;
+}
+.work-step{
+	padding: 16px 0;
+}
+.work-step_line{
+	display: flex;
+}
+.work-step_line span{
+	display: block;
+	height: 3px;
+	width: 33%;
+	background: #666;
+	margin-right: 8px;
+}
+.work-step_text{
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+.work-form>div{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.work-label{
+	width: 45%;
+	margin-bottom: 16px;
+}
+.work-input{
+	width: 100%;
+	margin-top: 8px;
+}
+.work-input_dropdown{
+	padding: 0.5rem 0.75rem;
+	border: 1px solid #cbd5e1;
+	color: #334155;
+	border-radius: 6px;
+}
+.work-radio .p-radiobutton-box{
+	background: #f1dc39;
+}
+.work-textarea{
+	width: 100%;
+}
+.work-delete{
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+.work-delete:hover{
+	transform: scale(1.2);
+}
