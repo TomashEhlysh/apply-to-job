@@ -157,21 +157,25 @@ export default {
         },
         addNewPosition(){
             if(this.company.trim() && this.startDate && this.endDate && this.position.trim()){
-                const work = {
-                    id: this.lastWork.length,
-                    company: this.company.trim(),
-                    position: this.position.trim(),
-                    startDate: moment(this.startDate).format('YYYY-MM-DD'),
-                    endDate: moment(this.endDate).format('YYYY-MM-DD'),
-                    comment: this.comment
+                if(this.startDate <= this.endDate){
+                    const work = {
+                        id: this.lastWork.length,
+                        company: this.company.trim(),
+                        position: this.position.trim(),
+                        startDate: moment(this.startDate).format('YYYY-MM-DD'),
+                        endDate: moment(this.endDate).format('YYYY-MM-DD'),
+                        comment: this.comment
+                    }
+                    this.lastWork.push(work)
+                    this.company = ''
+                    this.position = ''
+                    this.startDate = ''
+                    this.endDate = ''
+                    this.comment = ''
+                    this.showExp = true
+                }else{
+                    this.$store.dispatch('setMessages', [{ severity: 'error', content: 'Дата закінчення роботи не може бути меншою за початок!', id: this.count++}])
                 }
-                this.lastWork.push(work)
-                this.company = ''
-                this.position = ''
-                this.startDate = ''
-                this.endDate = ''
-                this.comment = ''
-                this.showExp = true
             }else{
                 this.$store.dispatch('setMessages', [{ severity: 'error', content: 'Заповніть всі обов`язкові поля', id: this.count++}])
             }
